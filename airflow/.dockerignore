@@ -1,0 +1,13 @@
+astro
+.git
+.env
+airflow_settings.yaml
+logs/
+.venv
+airflow.db
+airflow.cfg
+.astro
+*.p8
+*.pem
+rsa_key*
+.env.*
