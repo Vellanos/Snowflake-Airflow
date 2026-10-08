@@ -49,7 +49,7 @@ Le compte Snowflake doit permettre d'utiliser `USERADMIN` et `SYSADMIN` pour l'i
 
 2. Vérifier le poste avec `bash verifier_poste.sh`.
 3. Ouvrir un compte Snowflake Enterprise et relever son identifiant `ORGANISATION-COMPTE`.
-4. Ouvrir `snowflake/01_infrastructure.sql` dans Snowsight. Il crée le warehouse, les quatre schémas, `TRANSFORMER` et `AIRFLOW_SVC`. Avant Run All, remplacer les deux valeurs `RSA_PUBLIC_KEY` par sa propre clé publique, générée ci-dessous ; actualiser ou retirer également l'empreinte du commentaire dans la copie utilisée.
+4. Ouvrir `snowflake/01_infrastructure.sql` dans Snowsight. Il crée le warehouse, les quatre schémas, `TRANSFORMER` et `AIRFLOW_SVC`. Avant Run All, remplacer les deux valeurs `RSA_PUBLIC_KEY` par sa propre clé publique, générée ci-dessous.
 5. Générer sa paire de clés hors du dépôt :
 
    ```bash
@@ -63,7 +63,7 @@ Le compte Snowflake doit permettre d'utiliser `USERADMIN` et `SYSADMIN` pour l'i
    chmod 600 ~/.ssh/snowflake/rsa_key.pem ~/.ssh/snowflake/rsa_key.p8
    ```
 
-   Utiliser le corps de `rsa_key.pub`, sans les en-têtes ni les retours à la ligne, pour `RSA_PUBLIC_KEY`, puis exécuter le script d'infrastructure. Ne pas réutiliser la clé publique présente dans le dépôt. Ces commandes supposent que les fichiers de clés n'existent pas encore ; conserver toute paire déjà utilisée.
+   Utiliser le corps de `rsa_key.pub`, sans les en-têtes ni les retours à la ligne, pour `RSA_PUBLIC_KEY`, puis exécuter le script d'infrastructure. Ces commandes supposent que les fichiers de clés n'existent pas encore ; conserver toute paire déjà utilisée.
 
 6. Dans Snowsight, exécuter `snowflake/02_raw.sql` avec `TRANSFORMER`. Il crée les formats, le stage `TLC_STAGE` et les tables RAW. Le format Parquet utilise `USE_LOGICAL_TYPE=TRUE`.
 7. Préparer l'environnement d'ingestion, puis charger le référentiel des zones avant le DAG :
@@ -102,7 +102,7 @@ Le compte Snowflake doit permettre d'utiliser `USERADMIN` et `SYSADMIN` pour l'i
    PY
    ```
 
-   Pour tester séparément un mois, renseigner son compte Snowflake dans `ingestion/load_month.py`, puis lancer `python ingestion/load_month.py 2025-01`. Airflow peut aussi charger directement les trois mois.
+   Pour tester séparément un mois, définir `SNOWFLAKE_ACCOUNT` comme ci-dessus, puis lancer `python ingestion/load_month.py 2025-01`. Airflow peut aussi charger directement les trois mois.
 
 8. Copier `airflow/.env.example` vers `airflow/.env`. Dans un éditeur local, renseigner son compte et sa clé privée PKCS8 dans `private_key_content`, avec les retours à la ligne encodés en `\n` dans le JSON. La connexion s'appelle `snowflake_nyc_taxi` ; conserver `AIRFLOW_SVC`, `TRANSFORMER`, `NYC_TAXI_WH` et `NYC_TAXI`.
 9. Lancer `cd airflow && astro dev start`, puis ouvrir l'adresse Airflow affichée. Le projet Astro est déjà initialisé.
@@ -160,4 +160,4 @@ La clé privée reste hors Git ; `airflow/.env`, les clés et les données tél�
 
 ## Auteur
 
-Vellanos — nom configuré dans Git.
+David Bakalarz

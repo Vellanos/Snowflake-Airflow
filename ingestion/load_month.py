@@ -1,4 +1,5 @@
 import argparse
+import os
 import re
 from datetime import datetime
 from pathlib import Path
@@ -39,7 +40,7 @@ def main():
             Path("~/.ssh/snowflake/rsa_key.p8").expanduser().read_bytes(), password=None
         )
         with snowflake.connector.connect(
-            account="IONPFIY-DF65332",
+            account=os.environ["SNOWFLAKE_ACCOUNT"],
             user="AIRFLOW_SVC",
             private_key=key,
             role="TRANSFORMER",

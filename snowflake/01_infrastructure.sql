@@ -1,6 +1,5 @@
 -- Infrastructure NYC Yellow Taxi — Jour 1. Exécution : Run All dans Snowsight.
 -- Rôles requis : USERADMIN et SYSADMIN.
--- Empreinte de la clé publique : SHA256:Tc8OhdoVAbUAkb3gIEfERWU219ya2UAMT+ACCgvswf4=
 -- Les objets existants et leurs droits sont conservés.
 
 USE ROLE USERADMIN;
@@ -38,7 +37,7 @@ CREATE USER IF NOT EXISTS AIRFLOW_SVC
   DEFAULT_ROLE = TRANSFORMER
   DEFAULT_WAREHOUSE = NYC_TAXI_WH
   DEFAULT_NAMESPACE = 'NYC_TAXI.RAW'
-  RSA_PUBLIC_KEY = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApbTt9RXfEUOmmSc+GIBtDgSotr5+yOuoRzF2/wPaj2sg0l86EowTpTGX66/6jcm6VscytPcZNTFjNbco0N2zK4gf2tQqx8Wg9ehQAVEBEr1wFgdy+y27pfl6n1v0gltrvHc5an3Yk9D7ONr70iDntql4Elz7f8CcZ2OvyQj+ihxU6UWaS3DMwj1DK5T8EWTBgxO6OERHpDXV8mmfzF//QXJADzQAqTlbFmnrjnfbcqGkxGQ5JmNsLe3RntXJTc8NrVnW+2SkYeZ60Xi4oI88VLmqE4ahp2S9oCNpKaYf/ex38Gyh7Tv6Ub8Vy4r1Ep+68QfEjt0wc8VmdX2aP0OdIwIDAQAB'
+  RSA_PUBLIC_KEY = '<VOTRE_CLE_PUBLIQUE>'
   COMMENT = 'Service Airflow du pipeline NYC Yellow Taxi, authentification par clé';
 
 -- Mise à jour des paramètres du service si le compte existe déjà.
@@ -47,7 +46,7 @@ ALTER USER AIRFLOW_SVC SET
   DEFAULT_ROLE = TRANSFORMER
   DEFAULT_WAREHOUSE = NYC_TAXI_WH
   DEFAULT_NAMESPACE = 'NYC_TAXI.RAW'
-  RSA_PUBLIC_KEY = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApbTt9RXfEUOmmSc+GIBtDgSotr5+yOuoRzF2/wPaj2sg0l86EowTpTGX66/6jcm6VscytPcZNTFjNbco0N2zK4gf2tQqx8Wg9ehQAVEBEr1wFgdy+y27pfl6n1v0gltrvHc5an3Yk9D7ONr70iDntql4Elz7f8CcZ2OvyQj+ihxU6UWaS3DMwj1DK5T8EWTBgxO6OERHpDXV8mmfzF//QXJADzQAqTlbFmnrjnfbcqGkxGQ5JmNsLe3RntXJTc8NrVnW+2SkYeZ60Xi4oI88VLmqE4ahp2S9oCNpKaYf/ex38Gyh7Tv6Ub8Vy4r1Ep+68QfEjt0wc8VmdX2aP0OdIwIDAQAB';
+  RSA_PUBLIC_KEY = '<VOTRE_CLE_PUBLIQUE>';
 GRANT ROLE TRANSFORMER TO USER AIRFLOW_SVC;
 
 -- Vérification des objets et des droits.
